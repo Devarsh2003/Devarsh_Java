@@ -21,10 +21,10 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Registration</h3>
+						<h3 class="breadcrumb-header">Login</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li class="active">Register</li>
+							<li class="active">Login</li>
 						</ul>
 					</div>
 				</div>
@@ -55,15 +55,9 @@
 						<!-- Contact Us Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">Registration</h3>
+								<h3 class="title">Login</h3>
 							</div>
-							<form name="registerForm" action="UserController" method="post">
-								<div class="form-group">
-									<input class="input" type="text" name="fname" placeholder="First Name">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="lname" placeholder="Last Name">
-								</div>
+							<form name="login" action="UserController" method="post">
 								<div class="form-group">
 									<input class="input" type="email" name="email" placeholder="Email">
 								</div>
@@ -71,24 +65,9 @@
 									<input class="input" type="password" name="password" placeholder="Password">
 								</div>
 								<div class="form-group">
-									<input class="input" type="password" name="cpassword" placeholder="Confirm Password">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="mobile" placeholder="Mobile Number">
-								</div>							
-								<div>
-								<label>Gender : </label>
-									<input type="radio" name="gender" value="Female">Female
-									<input type="radio" name="gender" value="Male">Male
-								</div>
-										
+									<input type="submit" name="action" value="login" class="primary-btn order-submit">
+									&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="forgotpassword.jsp">Forgot Password ?</a>
 									
-								
-								<div class="form-group">
-									<textarea class="input" type="text" name="address" placeholder="Address"></textarea>
-								</div>
-								<div class="form-group">
-									<input type="submit" name="action" value="Register" class="primary-btn order-submit">
 								</div>
 							</form>
 						</div>

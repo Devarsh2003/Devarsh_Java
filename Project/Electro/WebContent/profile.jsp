@@ -21,10 +21,10 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Registration</h3>
+						<h3 class="breadcrumb-header">Profile</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li class="active">Register</li>
+							<li class="active">Profile</li>
 						</ul>
 					</div>
 				</div>
@@ -55,9 +55,9 @@
 						<!-- Contact Us Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">Registration</h3>
+								<h3 class="title">My Profile</h3>
 							</div>
-							<form name="registerForm" action="UserController" method="post">
+							<form name="profile" action="UserController" method="post">
 								<div class="form-group">
 									<input class="input" type="text" name="fname" placeholder="First Name">
 								</div>
@@ -65,13 +65,7 @@
 									<input class="input" type="text" name="lname" placeholder="Last Name">
 								</div>
 								<div class="form-group">
-									<input class="input" type="email" name="email" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<input class="input" type="password" name="password" placeholder="Password">
-								</div>
-								<div class="form-group">
-									<input class="input" type="password" name="cpassword" placeholder="Confirm Password">
+									<input class="input" type="email" name="email" placeholder="Email" readonly>
 								</div>
 								<div class="form-group">
 									<input class="input" type="text" name="mobile" placeholder="Mobile Number">
@@ -88,7 +82,7 @@
 									<textarea class="input" type="text" name="address" placeholder="Address"></textarea>
 								</div>
 								<div class="form-group">
-									<input type="submit" name="action" value="Register" class="primary-btn order-submit">
+									<input type="submit" name="action" value="Update Profile" class="primary-btn order-submit">
 								</div>
 							</form>
 						</div>
