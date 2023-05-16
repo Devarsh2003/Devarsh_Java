@@ -11,6 +11,7 @@ import javax.websocket.SendResult;
 
 import com.bean.User;
 import com.dao.UserDao;
+import com.service.Services;
 
 @WebServlet("/UserController")
 public class UserController extends HttpServlet {
@@ -37,9 +38,10 @@ public class UserController extends HttpServlet {
 				u.setMobile(Long.parseLong(request.getParameter("mobile")));
 				u.setGender(request.getParameter("gender"));
 				u.setAddress(request.getParameter("address"));
+				u.setUsertype(request.getParameter("usertype"));
 				UserDao.registerUser(u);
 				request.setAttribute("msg", "Registration is successful !!!");
-				request.getRequestDispatcher("register.jsp").forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 				// response.sendRedirect("register.jsp");
 			} else {
 				request.setAttribute("msg", "Password and Confirm Password doesn't match ");
@@ -54,14 +56,24 @@ public class UserController extends HttpServlet {
 			
 			if(u==null)
 			{
-				request.setAttribute("msg", "Invalid Email-id or password ");
+				request.setAttribute("msg", "Invalid Email-id or password");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 			else
 			{
-				HttpSession session = request.getSession();
-				session.setAttribute("u", u);
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				if (u.getUsertype().equals("user")) {
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("u", u);
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
+				else
+				{
+					HttpSession session = request.getSession();
+					session.setAttribute("u", u);
+					request.getRequestDispatcher("seller_index.jsp").forward(request, response);
+				}
+				
 			}
 		}
 		
@@ -70,31 +82,137 @@ public class UserController extends HttpServlet {
 			HttpSession session = request.getSession();
 			User u = (User)session.getAttribute("u");
 			
-			if(u.getPassword().equals(request.getParameter("oldpassword")))
+			if (u.getUsertype().equals("user")) 
 			{
-				if(request.getParameter("newpassword").equals(request.getParameter("cnewpassword")))
+				if(u.getPassword().equals(request.getParameter("oldpassword")))
 				{
-				
-					UserDao.changePassword(u.getEmail(), request.getParameter("newpassword"));
-					response.sendRedirect("logout.jsp");
+					if(request.getParameter("newpassword").equals(request.getParameter("cnewpassword")))
+					{
+						UserDao.changePassword(u.getEmail(), request.getParameter("newpassword"));
+						response.sendRedirect("logout.jsp");
+					}
+					else
+					{
+						request.setAttribute("msg", "New Password and Confirm Password doesn't match ");
+						request.getRequestDispatcher("changepassword.jsp").forward(request, response);;						
+					}
 				}
 				else
 				{
-					request.setAttribute("msg", "New Password and Confirm Password doesn't match ");
-					request.getRequestDispatcher("changepassword.jsp").forward(request, response);;
-					
+					request.setAttribute("msg", "Old Password is incorrect !!!");
+					request.getRequestDispatcher("changepassword.jsp").forward(request, response);
 				}
 				
 			}
 			else
 			{
-				request.setAttribute("msg", "Old Password is incorrect !!!");
-				request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+				if(u.getPassword().equals(request.getParameter("oldpassword")))
+				{
+					if(request.getParameter("newpassword").equals(request.getParameter("cnewpassword")))
+					{		
+						UserDao.changePassword(u.getEmail(), request.getParameter("newpassword"));
+						response.sendRedirect("logout.jsp");
+					}
+					else
+					{
+						request.setAttribute("msg", "New Password and Confirm Password doesn't match ");
+						request.getRequestDispatcher("seller_changepassword.jsp").forward(request, response);;	
+					}
+				}
+				else
+				{
+					request.setAttribute("msg", "Old Password is incorrect !!!");
+					request.getRequestDispatcher("seller_changepassword.jsp").forward(request, response);
+				}
+				
+			}
+			
+			
+		}
+		
+		else if (action.equalsIgnoreCase("Update Profile")) {
+			
+			User u = new User();
+			u.setUid(Integer.parseInt(request.getParameter("Uid")));
+			u.setFname(request.getParameter("fname"));
+			u.setLname(request.getParameter("lname"));
+			u.setEmail(request.getParameter("email"));
+			u.setMobile(Long.parseLong(request.getParameter("mobile")));
+			u.setAddress(request.getParameter("address"));
+			u.setUsertype(request.getParameter("usertype"));
+			UserDao.updateProfile(u);
+			HttpSession session = request.getSession();
+			session.setAttribute("u", u);
+			if(u.getUsertype().equals("user"))
+			{
+				request.getRequestDispatcher("profile.jsp").forward(request, response);
+			}
+			else
+			{
+				request.getRequestDispatcher("seller_profile.jsp").forward(request, response);
 			}
 			
 		}
 		
+		if(action.equalsIgnoreCase("Send OTP"))
+		{
+			String email = request.getParameter("email");
+			boolean flag = UserDao.checkEmail(email);
+			
+			if (flag==true) {
+				
+				int min = 1000;
+				int max = 9999;
+				int otp = (int)(Math.random()*(max-min+1)+min);
+				Services.sendMail(email, otp);
+				request.setAttribute("email", email);
+				request.setAttribute("otp", otp);
+				request.setAttribute("msg", "OTP sent successfully.");
+				request.getRequestDispatcher("otp.jsp").forward(request, response);
+				
+			}
+			else {
+				request.setAttribute("msg", "Email not registered");
+				request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
+			}
+		}
 		
+		else if (action.equalsIgnoreCase("Verify OTP")) {
+			
+			String email = request.getParameter("email");
+			int otp1 = Integer.parseInt(request.getParameter("otp1"));
+			int otp2 = Integer.parseInt(request.getParameter("otp2"));
+			if (otp1==otp2) {
+				
+				request.setAttribute("email", email);
+				request.getRequestDispatcher("newPassword.jsp").forward(request, response);
+			}
+			else {
+				request.setAttribute("email", email);
+				request.setAttribute("otp", otp1);
+				request.setAttribute("msg", "Invalid OTP");
+				request.getRequestDispatcher("otp.jsp").forward(request, response);
+			}
+			
+		}
+		else if (action.equalsIgnoreCase("Update Password")) {
+			
+			String email = request.getParameter("email");
+			String np= request.getParameter("newpassword");
+			String cnp= request.getParameter("cnewpassword");
+			
+			if (np.equals(cnp)) {
+				UserDao.changePassword(email, np);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+				
+			}
+			else {
+				request.setAttribute("email", email);
+				request.setAttribute("msg", "New Password and Confirm New Passowrd doesn't match");
+				request.getRequestDispatcher("newPassword.jsp").forward(request, response);
+					
+			}
+		}
 	}
 
 }

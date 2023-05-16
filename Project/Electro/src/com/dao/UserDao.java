@@ -16,7 +16,7 @@ public class UserDao {
 		try {
 
 			conn = electroUtil.createConnection();
-			String sql = "insert into user (fname,lname,email,password,cpassword,mobile,gender,address) values(?,?,?,?,?,?,?,?)";
+			String sql = "insert into user (fname,lname,email,password,cpassword,mobile,gender,address,usertype) values(?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, u.getFname());
 			pst.setString(2, u.getLname());
@@ -26,6 +26,7 @@ public class UserDao {
 			pst.setLong(6, u.getMobile());
 			pst.setString(7, u.getGender());
 			pst.setString(8, u.getAddress());
+			pst.setString(9, u.getUsertype());
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,6 +77,7 @@ public class UserDao {
 				u.setCpassword(rs.getString("cpassword"));
 				u.setGender(rs.getString("gender"));
 				u.setAddress(rs.getString("address"));
+				u.setUsertype(rs.getString("usertype"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,6 +102,26 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static void updateProfile(User u) {
+		
+		try {
+			
+			Connection conn = electroUtil.createConnection();
+			String sql = "update user set fname=?,lname=?,mobile=?,address=? where email=?";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, u.getFname());
+			pst.setString(2, u.getLname());
+			pst.setLong(3, u.getMobile());
+			pst.setString(4, u.getAddress());
+			pst.setString(5, u.getEmail());
+			pst.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

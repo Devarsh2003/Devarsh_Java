@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ include file="header.jsp" %>
-	
+<%@ include file="seller_header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,10 +21,10 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Profile</h3>
+						<h3 class="breadcrumb-header">Change Password</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
-							<li class="active">Profile</li>
+							<li class="active">Change Password</li>
 						</ul>
 					</div>
 				</div>
@@ -56,32 +55,21 @@
 						<!-- Contact Us Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">My Profile</h3>
+								<h3 class="title">Change Password</h3>
 							</div>
-							<form name="profile" action="UserController" method="post">
-								<div>
-									<input type="hidden" name="uid" value="">
+							<form name="ChangePassword" action="UserController" method="post">
+								<div class="form-group">
+									<input class="input" type="password" name="oldpassword" placeholder="Old Password">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="fname" placeholder="Fast Name">
+									<input class="input" type="password" name="newpassword" placeholder="New Password">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="lname" placeholder="Last Name">
+									<input class="input" type="password" name="cnewpassword" placeholder="Confirm New Password">
 								</div>
 								<div class="form-group">
-									<input class="input" type="email" name="email" placeholder="Email" readonly >
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="mobile" placeholder="Mobile Number">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="gender" placeholder="Gender" readonly>
-								</div>															
-								<div class="form-group">
-									<textarea class="input" type="text" name="address" placeholder="Address"></textarea>
-								</div>
-								<div class="form-group">
-									<input type="submit" name="action" value="Update Profile" class="primary-btn order-submit">
+									<input type="submit" name="action" value="Change Password" class="primary-btn order-submit">
+									
 								</div>
 							</form>
 						</div>
@@ -92,7 +80,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-		</div>
 
 		
 

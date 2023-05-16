@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ include file="header.jsp" %>
-	
+<%@ include file="seller_header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,10 +21,10 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Profile</h3>
+						<h3 class="breadcrumb-header">Add Product</h3>
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Profile</li>
+							<li><a href="seller_index.jsp">Home</a></li>
+							<li class="active">Add Product</li>
 						</ul>
 					</div>
 				</div>
@@ -56,32 +55,32 @@
 						<!-- Contact Us Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">My Profile</h3>
+								<h3 class="title">Add Product</h3>
 							</div>
-							<form name="profile" action="UserController" method="post">
-								<div>
-									<input type="hidden" name="uid" value="">
+							<form name="addproduct" action="ProductController" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="uid">
+								<label>Product Category : </label>
+									<input type="radio" name="prod_category" value="mobile" >Mobile
+									<input type="radio" name="prod_category" value="camera">Camera
+									<input type="radio" name="prod_category" value="laptop">Laptop
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="fname" placeholder="Fast Name">
+									<input class="input" type="text" name="prod_name" placeholder="Product Name">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="lname" placeholder="Last Name">
+									<input class="input" type="text" name="prod_model" placeholder="Product Model">
 								</div>
 								<div class="form-group">
-									<input class="input" type="email" name="email" placeholder="Email" readonly >
+									<input class="input" type="text" name="prod_price" placeholder="Product Price">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="mobile" placeholder="Mobile Number">
+									<textarea class="input" type="text" name="prod_desc" placeholder="Product Description"></textarea>
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="gender" placeholder="Gender" readonly>
-								</div>															
-								<div class="form-group">
-									<textarea class="input" type="text" name="address" placeholder="Address"></textarea>
+									<input type="file" name="prod_img">
 								</div>
 								<div class="form-group">
-									<input type="submit" name="action" value="Update Profile" class="primary-btn order-submit">
+									<input type="submit" name="action" value="Add Product" class="primary-btn order-submit">
 								</div>
 							</form>
 						</div>
@@ -92,7 +91,6 @@
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
-		</div>
 
 		
 

@@ -58,6 +58,10 @@
 								<h3 class="title">Registration</h3>
 							</div>
 							<form name="registerForm" action="UserController" method="post">
+								<label>User Type : </label>
+									<input type="radio" name="usertype" value="user" checked>User
+									<input type="radio" name="usertype" value="seller">Seller
+								</div>
 								<div class="form-group">
 									<input class="input" type="text" name="fname" placeholder="First Name">
 								</div>
@@ -81,9 +85,6 @@
 									<input type="radio" name="gender" value="Female">Female
 									<input type="radio" name="gender" value="Male">Male
 								</div>
-										
-									
-								
 								<div class="form-group">
 									<textarea class="input" type="text" name="address" placeholder="Address"></textarea>
 								</div>

@@ -43,8 +43,8 @@
 				<ul class="header-links pull-left">
 					<li><a href="#"><i class="fa fa-phone"></i> +91 9428087761</a></li>
 					<li><a href="#"><i class="fa fa-envelope-o"></i>
-							elecrto@gmail.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> Ring Road</a></li>
+							dgg99679967@gmail.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i>Bamroli Road</a></li>
 				</ul>
 				<ul class="header-links pull-right">
 					<li><a href="contact.jsp"><i class="fa fa-phone-square"></i>
@@ -60,9 +60,9 @@
 									
 									%>
 
-					<li><a href="profile.jsp"><i class="fa fa-user-o"></i>Profile</a></li>
+					<li><a href="seller_profile.jsp"><i class="fa fa-user-o"></i>Profile</a></li>
 					<li><a><span style="color:white;"><b>Welcome <%= u.getFname() %></b></span></a></li>
-					<li><a href="changepassword.jsp"><i class="fa fa-user-o"></i>Change Password</a></li>
+					<li><a href="seller_changepassword.jsp"><i class="fa fa-user-o"></i>Change Password</a></li>
 					<li><a href="logout.jsp"><i class="fa fa-user-o"></i>Logout</a></li>
 
 					<%								
@@ -113,8 +113,6 @@
 						</div>
 					</div>
 					<!-- /LOGO -->
-
-
 					<%
 							User u1 = new User();
 						
@@ -145,8 +143,7 @@
 						<div class="header-ctn">
 							<!-- Wishlist -->
 							<div>
-								<a href="#"> <i class="fa fa-heart-o"></i> <span>Your
-										Wishlist</span>
+								<a href="seller_add_product.jsp"> <i class="fa fa-plus"></i> <span>Add Product</span>
 									<div class="qty">2</div>
 								</a>
 							</div>
@@ -155,8 +152,7 @@
 							<!-- Cart -->
 							<div class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown"
-									aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
-										Cart</span>
+									aria-expanded="true"> <i class="fa fa-list"></i> <span>View Products</span>
 									<div class="qty">3</div>
 								</a>
 								<div class="cart-dropdown">
@@ -209,29 +205,20 @@
 
 							<!-- Menu Toogle -->
 							<div class="menu-toggle">
-								<a href="#"> <i class="fa fa-bars"></i> <span>Menu</span>
+								<a href="#"> <i class="fa fa-plus"></i> <span>Menu</span>
 								</a>
 							</div>
 							<!-- /Menu Toogle -->
 						</div>
 					</div>
 					<!-- /ACCOUNT -->
-
-
-
-					<%
-								
-								
+					<%		
 								}
 								else
-								{
-									
-								}
+								{						
 							}
-						
-						
-						%>
-
+						}												
+					%>
 				</div>
 				<!-- row -->
 			</div>
@@ -249,7 +236,7 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="index.jsp">Home</a></li>
+					<li class="active"><a href="seller_index.jsp">Home</a></li>
 				</ul>
 				<!-- /NAV -->
 			</div>

@@ -1,5 +1,7 @@
 <%
 	session.getAttribute("u");
 	session.invalidate();
-	response.sendRedirect("login.jsp");
+	request.setAttribute("msg", "Password changed Successfully !!!");
+	//response.sendRedirect("login.jsp");
+	request.getRequestDispatcher("login.jsp").forward(request, response);
 %>
