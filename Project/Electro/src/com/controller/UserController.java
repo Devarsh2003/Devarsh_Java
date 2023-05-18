@@ -133,7 +133,7 @@ public class UserController extends HttpServlet {
 		else if (action.equalsIgnoreCase("Update Profile")) {
 			
 			User u = new User();
-			u.setUid(Integer.parseInt(request.getParameter("Uid")));
+			u.setUid(Integer.parseInt(request.getParameter("uid")));
 			u.setFname(request.getParameter("fname"));
 			u.setLname(request.getParameter("lname"));
 			u.setEmail(request.getParameter("email"));
@@ -145,10 +145,12 @@ public class UserController extends HttpServlet {
 			session.setAttribute("u", u);
 			if(u.getUsertype().equals("user"))
 			{
+				request.setAttribute("msg", "Profile updated");
 				request.getRequestDispatcher("profile.jsp").forward(request, response);
 			}
 			else
 			{
+				request.setAttribute("msg", "Profile updated");
 				request.getRequestDispatcher("seller_profile.jsp").forward(request, response);
 			}
 			

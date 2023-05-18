@@ -60,25 +60,28 @@
 							</div>
 							<form name="profile" action="UserController" method="post">
 								<div>
-									<input type="hidden" name="uid" value="">
+									<input type="hidden" name="uid" value="<%=u.getUid()%>">
+								</div>
+								<div>
+									<input type="hidden" name="usertype" value="<%=u.getUsertype()%>">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="fname" placeholder="Fast Name">
+									<input class="input" type="text" name="fname" placeholder="Fast Name" value="<%=u.getFname()%>">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="lname" placeholder="Last Name">
+									<input class="input" type="text" name="lname" placeholder="Last Name" value="<%=u.getLname() %>">
 								</div>
 								<div class="form-group">
-									<input class="input" type="email" name="email" placeholder="Email" readonly >
+									<input class="input" type="email" name="email" placeholder="Email" value="<%=u.getEmail() %>" readonly >
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="mobile" placeholder="Mobile Number">
+									<input class="input" type="text" name="mobile" placeholder="Mobile Number" value="<%=u.getMobile()%>">
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="gender" placeholder="Gender" readonly>
+									<input class="input" type="text" name="gender" placeholder="Gender" readonly value="<%=u.getGender()%>">
 								</div>															
 								<div class="form-group">
-									<textarea class="input" type="text" name="address" placeholder="Address"></textarea>
+									<textarea class="input" type="text" name="address" placeholder="Address"><%=u.getAddress() %></textarea>
 								</div>
 								<div class="form-group">
 									<input type="submit" name="action" value="Update Profile" class="primary-btn order-submit">

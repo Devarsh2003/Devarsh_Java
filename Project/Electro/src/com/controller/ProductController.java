@@ -60,7 +60,7 @@ public class ProductController extends HttpServlet {
 			p.setProd_img(fileName);
 			ProductDao.addProduct(p);
 			request.setAttribute("msg", "Product added successfully ");
-			response.sendRedirect("seller_add_product.jsp");
+			request.getRequestDispatcher("seller_add_product.jsp").forward(request, response);
 			
 		}
 		

@@ -151,8 +151,7 @@
 
 							<!-- Cart -->
 							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown"
-									aria-expanded="true"> <i class="fa fa-list"></i> <span>View Products</span>
+								<a href="seller_view_products"> <i class="fa fa-list"></i> <span>View Products</span>
 									<div class="qty">3</div>
 								</a>
 								<div class="cart-dropdown">

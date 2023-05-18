@@ -58,7 +58,7 @@
 								<h3 class="title">Add Product</h3>
 							</div>
 							<form name="addproduct" action="ProductController" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="uid">
+								<input type="hidden" name="uid" value="<%=u.getUid()%>">
 								<label>Product Category : </label>
 									<input type="radio" name="prod_category" value="mobile" >Mobile
 									<input type="radio" name="prod_category" value="camera">Camera
