@@ -1,7 +1,9 @@
+<%@page import="com.dao.ProductDao"%>
+<%@page import="com.bean.Product"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ include file="header.jsp" %>
-<!DOCTYPE html>
+<%@include file="seller_header.jsp" %>
+    <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -9,10 +11,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML E-commerce Template</title>
+		<title>Electro - HTML Ecommerce Template</title>
 
+ 		
     </head>
 	<body>
+		
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -21,10 +25,10 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Contact Us</h3>
+						<h3 class="breadcrumb-header">Add Product</h3>
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Contact Us</li>
+							<li><a href="seller_index.jsp">Home</a></li>
+							<li class="active">Edit Product</li>
 						</ul>
 					</div>
 				</div>
@@ -41,40 +45,161 @@
 				<!-- row -->
 				<div class="row">
 				
-				
-				<%
-							if(request.getAttribute("msg")!=null)
-							{	
-								out.println(request.getAttribute("msg"));	
-							}
-						%>
+					<%
+						if(request.getAttribute("msg")!=null)
+						{
+							out.println(request.getAttribute("msg"));
+						}
 					
-
+					%>
+				
 					<div class="col-md-7">
-						<!-- Contact Us Details -->
+						<!-- Billing Details -->
+						
+						<%
+							int pid = Integer.parseInt(request.getParameter("pid"));
+							Product p = ProductDao.getProductById(pid);
+						%>
+						
+						
+						
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="title">Contact Us</h3>
+								<h3 class="title">Edit Product</h3>
 							</div>
-							<form name="contatForm" action="ContactController" method="post">
+							<form name="updateproduct" method="post" action="ProductController" >
+								<%-- <input type="hidden" name="uid" value="<%=u.getUid()%>"> --%>
+								<input type="hidden" name="pid" value="<%=p.getPid()%>">
 								<div class="form-group">
-									<input class="input" type="text" name="cfname" placeholder="First Name">
+								<table>
+								<tr>
+									<th>Product Category : </th>
+									
+									<%
+										if(p.getProd_category().equals("camera"))
+										{
+									%>
+										<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="mobile">Mobile
+										
+									</td>
+								
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="camera" checked="checked">Camera
+									</td>
+									
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="laptop">Laptop
+									</td>
+									<%		
+										}
+										else if(p.getProd_category().equals("mobile"))
+										{
+									%>
+										<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="mobile" checked="checked">Mobile
+										
+									</td>
+								
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="camera">Camera
+									</td>
+									
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="laptop">Laptop
+									</td>
+									
+									<%	
+										}
+										else if(p.getProd_category().equals("laptop"))
+										{
+									%>
+										<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="mobile">Mobile
+										
+									</td>
+								
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="camera">Camera
+									</td>
+									
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="laptop" checked="checked">Laptop
+									</td>
+									
+									<%		
+										}
+										else
+										{
+									%>
+									
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="mobile">Mobile
+										
+									</td>
+								
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="camera">Camera
+									</td>
+									
+									<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input  type="radio" name="prod_category" value="laptop">Laptop
+									</td>
+									
+									<%		
+										}
+									%>
+									
+									
+									
+								</tr>
+								</table>									
 								</div>
 								<div class="form-group">
-									<input class="input" type="text" name="clname" placeholder="Last Name">
+									<input class="input" type="text" name="prod_name" placeholder="Product Name" value="<%=p.getProd_name()%>">
 								</div>
 								<div class="form-group">
-									<input class="input" type="email" name="cemail" placeholder="Email">
+									<input class="input" type="text" name="prod_model" placeholder="Product Model" value="<%=p.getProd_model()%>">
 								</div>
 								<div class="form-group">
-									<textarea class="input" type="text" name="csuggestions" placeholder="Suggestions"></textarea>
+									<input class="input" type="text" name="prod_price" placeholder="Product Price" value="<%=p.getProd_price()%>">
+								</div>
+								
+								<div class="form-group">
+									<textarea class="input" rows="5" cols="10" placeholder=" Product Description" name="prod_desc"><%=p.getProd_desc() %></textarea>
+								</div>
+								
+								<div class="form-group">
+									<img alt="" src="Product_Images/<%=p.getProd_img()%>" width="100px" height="120px">
 								</div>
 								<div class="form-group">
-									<input type="submit" name="action" value="submit" class="primary-btn order-submit">
+									<input type="submit" class="primary-btn order-submit" name="action" value="Update Product"> 
 								</div>
 							</form>
+							
+							
+							
+						
 						</div>
-						<!-- /Contact Us Details -->
+						<!-- /Billing Details -->
+
+						
+
+						
+					</div>
+
 				</div>
 				<!-- /row -->
 			</div>
@@ -190,3 +315,4 @@
 
 	</body>
 </html>
+    

@@ -41,58 +41,55 @@
 		<div id="top-header">
 			<div class="container">
 				<ul class="header-links pull-left">
-					<li><a href="#"><i class="fa fa-phone"></i> +91 9428087761</a></li>
+					<li><a href="#"><i class="fa fa-phone"></i> 02233655478</a></li>
 					<li><a href="#"><i class="fa fa-envelope-o"></i>
-							elecrto@gmail.com</a></li>
-					<li><a href="#"><i class="fa fa-map-marker"></i> Ring Road</a></li>
+							electro@gmail.com</a></li>
+					<li><a href="#"><i class="fa fa-map-marker"></i> Surat
+							Ring Road</a></li>
 				</ul>
 				<ul class="header-links pull-right">
-					<li><a href="contact.jsp"><i class="fa fa-phone-square"></i>
-							Contact Us</a></li>
+					<li><a href="contact.jsp"><i class="fa fa-phone-square"
+							aria-hidden="true"></i> Contact</a></li>
 
-					<% 
+					<%
 							User u = null;
 							if(session!=null)
 							{
 								if(session.getAttribute("u")!=null)
 								{
 									u = (User)session.getAttribute("u");
-									
-									%>
+							%>
+					<li><a href="profile.jsp"><i class="fa fa-user-o"></i>
+							Profile</a></li>
+					<li><span style="color:white;"><b>Welcome <%=u.getFname() %></b></span></li>
+					<li><a href="changepassword.jsp"><i class="fa fa-user-o"></i>
+							Change Password</a></li>													
+					<li><a href="logout.jsp"><i class="fa fa-user-o"></i>
+							Logout</a></li>
 
-					<li><a href="profile.jsp"><i class="fa fa-user-o"></i>Profile</a></li>
-					<li><a><span style="color:white;"><b>Welcome <%= u.getFname() %></b></span></a></li>
-					<li><a href="changepassword.jsp"><i class="fa fa-user-o"></i>Change Password</a></li>
-					<li><a href="logout.jsp"><i class="fa fa-user-o"></i>Logout</a></li>
-
-					<%								
+					<%							
 								}
 								else
 								{
-									%>
-					<li><a href="register.jsp"><i class="fa fa-user-o"></i>Register
-							Us</a></li>
-					<li><a href="login.jsp"><i class="fa fa-user-o"></i>Login</a></li>
-
-					<%			
-									
+							%>
+					<li><a href="register.jsp"><i class="fa fa-user-o"></i>
+							Register</a></li>
+					<li><a href="login.jsp"><i class="fa fa-user-o"></i> Login</a></li>
+					<%
 								}
 								
 							}
 							else
 							{
-								%>
-					<li><a href="register.jsp"><i class="fa fa-user-o"></i>Register
-							Us</a></li>
-					<li><a href="login.jsp"><i class="fa fa-user-o"></i>Login</a></li>
-
-					<%			
-								
+						%>
+							<li><a href="register.jsp"><i class="fa fa-user-o"></i>
+							Register</a></li>
+					<li><a href="login.jsp"><i class="fa fa-user-o"></i> Login</a></li>
+						<%		
 							}
-												
+						
 						
 						%>
-
 
 				</ul>
 			</div>
@@ -113,19 +110,19 @@
 						</div>
 					</div>
 					<!-- /LOGO -->
-
-
+		
+		
 					<%
-							User u1 = new User();
-						
-							if(session!=null)		
+						User u1 = null;
+						if(session!=null)
+						{
+							if(session.getAttribute("u")!=null)
 							{
-								if(session.getAttribute("u")!=null)
-								{
-									u1 = (User)session.getAttribute("u");
+								u1 = (User)session.getAttribute("u");
 								
 								%>
-					<!-- SEARCH BAR -->
+								
+								<!-- SEARCH BAR -->
 					<div class="col-md-6">
 						<div class="header-search">
 							<form>
@@ -145,65 +142,43 @@
 						<div class="header-ctn">
 							<!-- Wishlist -->
 							<div>
-								<a href="#"> <i class="fa fa-heart-o"></i> <span>Your
+								<a href="mywishlist.jsp"> <i class="fa fa-heart-o"></i> <span>Your
 										Wishlist</span>
-									<div class="qty">2</div>
+									<div class="qty">
+									<%
+										if(session!=null)
+										{
+											if(session.getAttribute("wishlist_count")!=null)
+											{
+												out.print(session.getAttribute("wishlist_count"));
+											}
+										}
+									
+									%>									
+									</div>
 								</a>
 							</div>
 							<!-- /Wishlist -->
 
 							<!-- Cart -->
 							<div class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown"
-									aria-expanded="true"> <i class="fa fa-shopping-cart"></i> <span>Your
+								<a href="mycart.jsp"> <i class="fa fa-shopping-cart"></i> <span>Your
 										Cart</span>
-									<div class="qty">3</div>
+									<div class="qty">
+									<%
+										if(session!=null)
+										{
+											if(session.getAttribute("cart_count")!=null)
+											{
+												out.println(session.getAttribute("cart_count"));
+											}
+										}
+									
+									%>					
+									
+									</div>
 								</a>
-								<div class="cart-dropdown">
-									<div class="cart-list">
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="./img/product01.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">1x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-
-										<div class="product-widget">
-											<div class="product-img">
-												<img src="./img/product02.png" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-name">
-													<a href="#">product name goes here</a>
-												</h3>
-												<h4 class="product-price">
-													<span class="qty">3x</span>$980.00
-												</h4>
-											</div>
-											<button class="delete">
-												<i class="fa fa-close"></i>
-											</button>
-										</div>
-									</div>
-									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: $2940.00</h5>
-									</div>
-									<div class="cart-btns">
-										<a href="#">View Cart</a> <a href="#">Checkout <i
-											class="fa fa-arrow-circle-right"></i></a>
-									</div>
-								</div>
+								
 							</div>
 							<!-- /Cart -->
 
@@ -216,22 +191,19 @@
 						</div>
 					</div>
 					<!-- /ACCOUNT -->
-
-
-
-					<%
 								
-								
-								}
-								else
-								{
-									
-								}
+								<%
 							}
+							else
+							{
+								
+							}
+						}
 						
-						
-						%>
-
+					%>
+		
+		
+					
 				</div>
 				<!-- row -->
 			</div>
@@ -249,7 +221,11 @@
 			<div id="responsive-nav">
 				<!-- NAV -->
 				<ul class="main-nav nav navbar-nav">
-					<li class="active"><a href="index.jsp">Home</a></li>
+					<li ><a href="index.jsp">Home</a></li>				
+					<li><a href="filter_product.jsp?prod_category=laptop">Laptops</a></li>
+					<li><a href="filter_product.jsp?prod_category=mobile">Smartphones</a></li>
+					<li><a href="filter_product.jsp?prod_category=camera">Cameras</a></li>
+					
 				</ul>
 				<!-- /NAV -->
 			</div>
@@ -258,5 +234,9 @@
 		<!-- /container -->
 	</nav>
 	<!-- /NAVIGATION -->
+
+
+
+
 </body>
 </html>

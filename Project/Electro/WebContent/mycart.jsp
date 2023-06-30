@@ -1,3 +1,8 @@
+<%@page import="java.util.Random"%>
+<%@page import="com.dao.CartDao"%>
+<%@page import="com.bean.Cart"%>
+<%@page import="com.dao.WishlistDao"%>
+<%@page import="com.bean.Wishlist"%>
 <%@page import="com.dao.ProductDao"%>
 <%@page import="com.bean.Product"%>
 <%@page import="java.util.List"%>
@@ -5,6 +10,11 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ include file="header.jsp" %>   
+ <%
+ 	Random randomGenerator = new Random();
+	int randomInt = randomGenerator.nextInt(1000000);
+ %>
+ 
     
     
 <!DOCTYPEhtml>
@@ -34,7 +44,7 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">New Products</h3>
+							<h3 class="title">My Cart</h3>
 						
 						</div>
 					</div>
@@ -52,9 +62,12 @@
 
 										<!-- product -->
 										<%
-											List<Product> list = ProductDao.getAllProduct();
-											for(Product p : list)
+										int net_price = 0;
+											List<Cart> list = CartDao.getCartByUser(u.getUid());
+											for(Cart c : list)
 											{
+												net_price = net_price+c.getTotal_price();
+												Product p = ProductDao.getProductById(c.getPid());
 										%>
 										
 										
@@ -73,6 +86,22 @@
 												<h3 class="product-name"><%=p.getProd_name() %></h3>
 												<h4 class="product-price">Rs. <%=p.getProd_price() %></h4>
 												<div class="product-rating">
+												
+												</div>
+												<!-- Quantity Form -->
+												<form action="CartController" name="changeqty" method="post">
+												<input type="hidden" name="cid" value="<%=c.getCid()%>">
+													<h3 class="product-name">
+														<b>Quantity : </b>
+														<input type="number" min="1" max="10" value="<%=c.getProd_qty() %>" name="prod_qty" onchange="this.form.submit();">
+													</h3>
+												</form>
+												
+												<div class="product-rating">
+												</div>
+												<h3 class="product-name">Total Price :</h3>
+												<h4 class="product-price">Rs. <%=c.getTotal_price() %></h4>
+												<div class="product-rating">
 												</div>
 												<div class="product-btns">
 													<a href="product_detail.jsp?pid=<%=p.getPid()%>">
@@ -89,8 +118,59 @@
 										<%
 											}
 										%>
-
+										<form method="post" action="pgRedirect.jsp">
+		<table border="1">
+			<tbody>
+				<tr>
+					<th>S.No</th>
+					<th>Label</th>
+					<th>Value</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td><label>ORDER_ID::*</label></td>
+					<td><input id="ORDER_ID" tabindex="1" maxlength="20" size="20"
+						name="ORDER_ID" autocomplete="off"
+						value="ORDS_<%= randomInt %>">
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td><label>CUSTID ::*</label></td>
+					<td><input id="CUST_ID" tabindex="2" maxlength="30" size="12" name="CUST_ID" autocomplete="off" value="CUST001"></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td><label>INDUSTRY_TYPE_ID ::*</label></td>
+					<td><input id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail"></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td><label>Channel ::*</label></td>
+					<td><input id="CHANNEL_ID" tabindex="4" maxlength="12"
+						size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
+					</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td><label>txnAmount*</label></td>
+					<td><input title="TXN_AMOUNT" tabindex="10"
+						type="text" name="TXN_AMOUNT"
+						value="<%=net_price%>">
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><input value="CheckOut" type="submit"	onclick="" class="btn btn-danger"></td>
+				</tr>
+			</tbody>
+		</table>
+		* - Mandatory Fields
+	</form>
 									</div>
+									
+									
 									<div id="slick-nav-1" class="products-slick-nav"></div>
 								</div>
 								<!-- /tab -->

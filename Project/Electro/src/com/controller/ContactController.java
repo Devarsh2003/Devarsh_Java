@@ -26,7 +26,9 @@ public class ContactController extends HttpServlet {
 			c.setCemail(request.getParameter("cemail"));
 			c.setCsuggestion(request.getParameter("csuggestions"));
 			electroDao.insertContact(c);
-			response.sendRedirect("index.jsp");
+			//response.sendRedirect("index.jsp");
+			request.setAttribute("msg", "Thanks for contacting us !!!");
+			request.getRequestDispatcher("contact.jsp").forward(request, response);
 			
 		}
 	}

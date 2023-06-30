@@ -1,7 +1,15 @@
+<%@page import="com.dao.WishlistDao"%>
+<%@page import="com.bean.Wishlist"%>
+<%@page import="com.dao.ProductDao"%>
+<%@page import="com.bean.Product"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ include file="header.jsp" %>
-<!DOCTYPE html>
+
+<%@ include file="header.jsp" %>   
+    
+    
+<!DOCTYPEhtml>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -9,30 +17,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML E-commerce Template</title>
+		<title>Electro - HTML Ecommerce Template</title>
+		
 
     </head>
 	<body>
+		
 
-		<!-- BREADCRUMB -->
-		<div id="breadcrumb" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<h3 class="breadcrumb-header">Contact Us</h3>
-						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
-							<li class="active">Contact Us</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /BREADCRUMB -->
+		
 
 		<!-- SECTION -->
 		<div class="section">
@@ -40,47 +32,87 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-				
-				
-				<%
-							if(request.getAttribute("msg")!=null)
-							{	
-								out.println(request.getAttribute("msg"));	
-							}
-						%>
-					
 
-					<div class="col-md-7">
-						<!-- Contact Us Details -->
-						<div class="billing-details">
-							<div class="section-title">
-								<h3 class="title">Contact Us</h3>
-							</div>
-							<form name="contatForm" action="ContactController" method="post">
-								<div class="form-group">
-									<input class="input" type="text" name="cfname" placeholder="First Name">
-								</div>
-								<div class="form-group">
-									<input class="input" type="text" name="clname" placeholder="Last Name">
-								</div>
-								<div class="form-group">
-									<input class="input" type="email" name="cemail" placeholder="Email">
-								</div>
-								<div class="form-group">
-									<textarea class="input" type="text" name="csuggestions" placeholder="Suggestions"></textarea>
-								</div>
-								<div class="form-group">
-									<input type="submit" name="action" value="submit" class="primary-btn order-submit">
-								</div>
-							</form>
+					<!-- section title -->
+					<div class="col-md-12">
+						<div class="section-title">
+							<h3 class="title">My Wishlist</h3>
+						
 						</div>
-						<!-- /Contact Us Details -->
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">			
+
+										
+
+										<!-- product -->
+										<%
+											List<Wishlist> list = WishlistDao.getWishListByUser(u.getUid());
+											for(Wishlist w : list)
+											{
+												Product p = ProductDao.getProductById(w.getPid());
+										%>
+										
+										
+										
+										
+										
+										<div class="product">
+											<div class="product-img">
+												<img src="Product_Images/<%=p.getProd_img() %>" alt="" height="200px" width="80px">
+												<div class="product-label">
+													<span class="sale">-30%</span>
+												</div>
+											</div>
+											<div class="product-body">
+												<p class="product-category"><%=p.getProd_category() %></p>
+												<h3 class="product-name"><%=p.getProd_name() %></h3>
+												<h4 class="product-price">Rs. <%=p.getProd_price() %></h4>
+												<div class="product-rating">
+												</div>
+												<div class="product-btns">
+													<a href="product_detail.jsp?pid=<%=p.getPid()%>">
+														<input type="button" value="Details" class="btn btn-primary">
+													</a>
+												</div>
+											</div>
+											<!-- <div class="add-to-cart">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</div> -->
+										</div>
+										<!-- /product -->
+
+										<%
+											}
+										%>
+
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
 				</div>
 				<!-- /row -->
 			</div>
 			<!-- /container -->
 		</div>
 		<!-- /SECTION -->
+		<br><br><br>
+		
+		
+
+	
+		
 
 		
 
